@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getLogs, url, formatDate } from '../../site';
+
+const logs = await getLogs();
+---
+
+<Base title="일지" description="그날 한 개발을 짧게 적습니다.">
+  <h1>일지</h1>
+  <p class="intro">그날 한 개발을 짧게 적습니다.</p>
+  {logs.length === 0 && <p class="meta">아직 올라온 일지가 없습니다.</p>}
+  <ul>
+    {
+      logs.map((log) => (
+        <li>
+          <time class="meta" datetime={log.data.date.toISOString()}>{formatDate(log.data.date)}</time>
+          <a href={url(`posts/${log.id}/`)}>{log.data.title}</a>
+          {log.data.draft && <span class="draft">초안</span>}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .intro { color: var(--muted); margin: 0 0 32px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { display: flex; gap: 16px; align-items: baseline; margin-bottom: 14px; }
+  li time { flex: none; width: 9em; }
+  li a { color: var(--fg); font-weight: 600; }
+  @media (max-width: 480px) {
+    li { flex-direction: column; gap: 0; }
+  }
+</style>

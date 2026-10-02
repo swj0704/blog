@@ -8,10 +8,16 @@ export const SITE = {
 };
 
 // draft 글은 로컬 개발 서버에서만 보입니다.
-export async function getPosts() {
-  const posts = await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft);
-  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+async function getEntries(kind: 'post' | 'log') {
+  const entries = await getCollection(
+    'posts',
+    ({ data }) => data.kind === kind && (import.meta.env.DEV || !data.draft),
+  );
+  return entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
+
+export const getPosts = () => getEntries('post');
+export const getLogs = () => getEntries('log');
 
 export const url = (path = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path}`;
 
