@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, getPosts, url, formatDate } from '../site';
+
+const posts = await getPosts();
+---
+
+<Base>
+  <p class="intro">{SITE.description}</p>
+  {posts.length === 0 && <p class="meta">아직 올라온 글이 없습니다.</p>}
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={url(`posts/${post.id}/`)}>{post.data.title}</a>
+          {post.data.draft && <span class="draft">초안</span>}
+          <p>{post.data.description}</p>
+          <time class="meta" datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .intro { color: var(--muted); margin: 0 0 40px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin-bottom: 36px; }
+  li a { font-size: 1.2rem; font-weight: 700; color: var(--fg); }
+  li p { margin: 4px 0; color: var(--muted); font-size: 15px; }
+</style>

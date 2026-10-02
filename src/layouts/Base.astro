@@ -1,0 +1,121 @@
+---
+import { SITE, url } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" href={url('favicon.svg')} />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href={url()}>{SITE.title}</a>
+      <nav>
+        <a href={url()}>글</a>
+        <a href={url('about/')}>소개</a>
+        <a href={SITE.github}>GitHub</a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>© {new Date().getFullYear()} {SITE.author}</footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfaf7;
+    --fg: #1c1b19;
+    --muted: #6f6b63;
+    --line: #e4e0d6;
+    --accent: #1f7a4d;
+    --code-bg: #f1eee6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15161a;
+      --fg: #e8e6e1;
+      --muted: #9a968d;
+      --line: #2b2d33;
+      --accent: #6fd39a;
+      --code-bg: #1f2126;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    max-width: 680px;
+    padding: 0 20px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    color: var(--fg);
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-weight: 700;
+  }
+  nav { display: flex; gap: 16px; font-size: 15px; }
+  nav a { color: var(--muted); }
+  main { padding: 40px 0 64px; min-height: 60vh; }
+  footer {
+    padding: 24px 0 40px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  h1 { font-size: 1.8rem; line-height: 1.35; margin: 0 0 8px; }
+  h2 { font-size: 1.3rem; margin: 2.4em 0 0.6em; }
+  h3 { font-size: 1.1rem; margin: 2em 0 0.5em; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .draft {
+    margin-left: 8px;
+    padding: 1px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  blockquote {
+    margin: 1.5em 0;
+    padding: 0 0 0 16px;
+    border-left: 3px solid var(--accent);
+    color: var(--muted);
+  }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  pre { padding: 16px; border-radius: 8px; overflow-x: auto; line-height: 1.6; }
+  pre code { background: none; padding: 0; }
+  img { max-width: 100%; border-radius: 8px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+</style>
