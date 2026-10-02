@@ -1,9 +1,9 @@
 import { getCollection } from 'astro:content';
 
 export const SITE = {
-  title: 'wonjoon.log',
+  title: '신원준의 개발 기록',
   description: '안드로이드 개발자로 일하며 겪은 것들을 적습니다.',
-  author: 'Wonjoon Shin',
+  author: '신원준',
   github: 'https://github.com/swj0704',
 };
 
