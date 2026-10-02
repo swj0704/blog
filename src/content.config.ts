@@ -8,7 +8,7 @@ const posts = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().default(false),
-    // 'log' 는 개발 일지. 글 목록이 아니라 /log/ 에 모인다.
+    // 'log' 는 일지(개발, 공부 등 그날의 기록). 글 목록이 아니라 /log/ 에 모인다.
     kind: z.enum(['post', 'log']).default('post'),
   }),
 });

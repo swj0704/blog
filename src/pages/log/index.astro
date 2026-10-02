@@ -5,9 +5,9 @@ import { getLogs, url, formatDate } from '../../site';
 const logs = await getLogs();
 ---
 
-<Base title="일지" description="그날 한 개발을 짧게 적습니다.">
+<Base title="일지" description="그날 한 일과 배운 것을 짧게 적습니다.">
   <h1>일지</h1>
-  <p class="intro">그날 한 개발을 짧게 적습니다.</p>
+  <p class="intro">그날 한 일과 배운 것을 짧게 적습니다.</p>
   {logs.length === 0 && <p class="meta">아직 올라온 일지가 없습니다.</p>}
   <ul>
     {
