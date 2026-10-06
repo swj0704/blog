@@ -1,7 +1,7 @@
 ---
 title: '가드를 달아도 다시 나오는 크래시 두 개'
 description: '채팅 화면의 binding NPE와 RecyclerView의 "Scrapped or attached views may not be recycled"를 추적하고, 막는 대신 없앤 이야기.'
-date: 2026-10-02
+date: 2026-10-02T11:00:00+09:00
 ---
 
 채팅 화면에는 고쳐도 다시 나오는 크래시가 두 개 있었다. 하나는 `binding` NPE이고, 하나는 RecyclerView의 `Scrapped or attached views may not be recycled`다.
