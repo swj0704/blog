@@ -5,6 +5,8 @@ export const SITE = {
   description: '안드로이드 개발자로 일하며 겪은 것들을 적습니다.',
   author: '신원준',
   github: 'https://github.com/swj0704',
+  // Cloudflare Web Analytics 토큰. 비어 있으면 스크립트를 넣지 않는다.
+  cfAnalyticsToken: 'ebfc92bdbbef4332bf75487ebf8d834a',
 };
 
 // draft 글은 로컬 개발 서버에서만 보입니다.

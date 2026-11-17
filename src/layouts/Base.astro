@@ -19,6 +19,16 @@ const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <link rel="icon" href={url('favicon.svg')} />
+    {
+      SITE.cfAnalyticsToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: SITE.cfAnalyticsToken })}
+        />
+      )
+    }
   </head>
   <body>
     <header>
